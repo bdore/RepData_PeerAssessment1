@@ -56,7 +56,7 @@ First identify which variables contain missing values:
 ```{r}
 summary(activity)
 ```
-All NA's are in the **steps** variable. There are *`sum(is.na(activity))`* missing values.
+All NA's are in the **steps** variable. There are **`r sum(is.na(activity))`** missing values.
 
 From exploratory analysis of the data it was possible to see that there is great variance of number of steps from day to day so in my opinion that would introduce a bias that is too large.
 

@@ -81,7 +81,7 @@ summary(activity)
 ##  Max.   :806.00   2012-10-06:  288   Max.   :2355.0  
 ##  NA's   :2304     (Other)   :15840
 ```
-All NA's are in the **steps** variable. There are *`sum(is.na(activity))`* missing values.
+All NA's are in the **steps** variable. There are **2304** missing values.
 
 From exploratory analysis of the data it was possible to see that there is great variance of number of steps from day to day so in my opinion that would introduce a bias that is too large.
 

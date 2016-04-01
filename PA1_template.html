@@ -158,7 +158,7 @@ plot(avgActivity$interval, avgActivity$steps, col = &quot;red&quot;, type= &quot
 ##  3rd Qu.: 12.00   2012-10-05:  288   3rd Qu.:1766.2  
 ##  Max.   :806.00   2012-10-06:  288   Max.   :2355.0  
 ##  NA's   :2304     (Other)   :15840</code></pre>
-<p>All NA’s are in the <strong>steps</strong> variable. There are <em><code>sum(is.na(activity))</code></em> missing values.</p>
+<p>All NA’s are in the <strong>steps</strong> variable. There are <strong>2304</strong> missing values.</p>
 <p>From exploratory analysis of the data it was possible to see that there is great variance of number of steps from day to day so in my opinion that would introduce a bias that is too large.</p>
 <p>The variance of the number of steps within each 5-minute interval introduces less bias. I chose to impute the corresponding average number of steps of the 5-minute interval in the missing value of the <strong>steps</strong> variable.</p>
 <p>Creates a new data frame based on the original</p>
