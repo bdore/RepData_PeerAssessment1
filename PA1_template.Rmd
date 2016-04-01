@@ -7,20 +7,14 @@ output:
 
 
 ## Loading and preprocessing the data
-```{r, message = F}
+```{r, message = F, results='hide'}
 Sys.setlocale("LC_TIME", "English")
 library(ggplot2)
 library(dplyr)
 library(plyr)
-```
 
-```{r}
+unzip("repdata-data-activity.zip")
 activity <- read.csv("activity.csv", na.strings = "NA")
-```
-
-Transform **date** variable from *factor* to *date* class
-```{r}
-activity$date <- as.Date(activity$date, "%Y-%m-%d")
 ```
 
 Histogram of total number of steps taken each day
@@ -62,7 +56,7 @@ First identify which variables contain missing values:
 ```{r}
 summary(activity)
 ```
-All NA's are in the **steps** variable.
+All NA's are in the **steps** variable. There are *`sum(is.na(activity))`* missing values.
 
 From exploratory analysis of the data it was possible to see that there is great variance of number of steps from day to day so in my opinion that would introduce a bias that is too large.
 
@@ -116,6 +110,13 @@ Both mean and median after impute are very close to the original values.
 
 Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
+Transform **date** variable from *factor* to *date* class
+```{r}
+imputeActivity$date <- as.Date(imputeActivity$date, "%Y-%m-%d")
+```
+
+Identify days of the week and set values of **day.of.the.week** variable to "weekend" or "weekday"
+
 ```{r}
 for(i in 1:length(imputeActivity$date)){
         if(weekdays(imputeActivity$date[i]) %in% c("Sunday", "Saturday")){
@@ -140,4 +141,5 @@ plot(weekdayAvgActivity$interval, weekdayAvgActivity$steps, type = "l", main = "
 plot(weekendAvgActivity$interval, weekendAvgActivity$steps, type = "l", main = "Weekend Activity", ylim = c(0, 250))
 ```
 
+It is possible to see that the activity is more evenly distribute during the weekends. During weekdays there is peak activity in the morning and a sharp drop afterwards. Activity decreases earlier in the weekdays.
 

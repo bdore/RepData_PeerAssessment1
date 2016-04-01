@@ -5,27 +5,12 @@
 
 ```r
 Sys.setlocale("LC_TIME", "English")
-```
-
-```
-## [1] "English_United States.1252"
-```
-
-```r
 library(ggplot2)
 library(dplyr)
 library(plyr)
-```
 
-
-```r
+unzip("repdata-data-activity.zip")
 activity <- read.csv("activity.csv", na.strings = "NA")
-```
-
-Transform **date** variable from *factor* to *date* class
-
-```r
-activity$date <- as.Date(activity$date, "%Y-%m-%d")
 ```
 
 Histogram of total number of steps taken each day
@@ -35,7 +20,7 @@ totalStepsPerDay <- aggregate(steps ~ date, activity, sum)
 hist(totalStepsPerDay$steps, xlab = "Total number of steps each day", main = "Histogram of total number of steps taken each day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)
 
 ## What is mean total number of steps taken per day?
 Mean and median number of steps taken each day
@@ -69,7 +54,7 @@ avgActivity <- aggregate(steps ~ interval, activity, mean)
 plot(avgActivity$interval, avgActivity$steps, col = "red", type= "l", xlab = "5-minute interval", ylab = "Average number of steps", main = "Average number of steps during a day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)
 
 The 5-minute interval that, on average, contains the maximum number of steps
 
@@ -87,16 +72,16 @@ summary(activity)
 ```
 
 ```
-##      steps             date               interval     
-##  Min.   :  0.00   Min.   :2012-10-01   Min.   :   0.0  
-##  1st Qu.:  0.00   1st Qu.:2012-10-16   1st Qu.: 588.8  
-##  Median :  0.00   Median :2012-10-31   Median :1177.5  
-##  Mean   : 37.38   Mean   :2012-10-31   Mean   :1177.5  
-##  3rd Qu.: 12.00   3rd Qu.:2012-11-15   3rd Qu.:1766.2  
-##  Max.   :806.00   Max.   :2012-11-30   Max.   :2355.0  
-##  NA's   :2304
+##      steps                date          interval     
+##  Min.   :  0.00   2012-10-01:  288   Min.   :   0.0  
+##  1st Qu.:  0.00   2012-10-02:  288   1st Qu.: 588.8  
+##  Median :  0.00   2012-10-03:  288   Median :1177.5  
+##  Mean   : 37.38   2012-10-04:  288   Mean   :1177.5  
+##  3rd Qu.: 12.00   2012-10-05:  288   3rd Qu.:1766.2  
+##  Max.   :806.00   2012-10-06:  288   Max.   :2355.0  
+##  NA's   :2304     (Other)   :15840
 ```
-All NA's are in the **steps** variable.
+All NA's are in the **steps** variable. There are *`sum(is.na(activity))`* missing values.
 
 From exploratory analysis of the data it was possible to see that there is great variance of number of steps from day to day so in my opinion that would introduce a bias that is too large.
 
@@ -134,7 +119,7 @@ hist(totalStepsPerDay$steps, ylim = c(0,40), main = "Total steps/day before impu
 hist(imputeTotalStepsPerDay$steps, ylim = c(0,40), main = "Total steps/day after impute")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png)
 
 Imputing the missing values shows a significant increase in the frequency of observations in the 10k - 15k range of steps while the other ranges are not significantly affected.
 
@@ -166,6 +151,14 @@ Both mean and median after impute are very close to the original values.
 
 Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
+Transform **date** variable from *factor* to *date* class
+
+```r
+imputeActivity$date <- as.Date(imputeActivity$date, "%Y-%m-%d")
+```
+
+Identify days of the week and set values of **day.of.the.week** variable to "weekend" or "weekday"
+
 
 ```r
 for(i in 1:length(imputeActivity$date)){
@@ -192,6 +185,7 @@ plot(weekdayAvgActivity$interval, weekdayAvgActivity$steps, type = "l", main = "
 plot(weekendAvgActivity$interval, weekendAvgActivity$steps, type = "l", main = "Weekend Activity", ylim = c(0, 250))
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)
+![](PA1_template_files/figure-html/unnamed-chunk-16-1.png)
 
+It is possible to see that the activity is more evenly distribute during the weekends. During weekdays there is peak activity in the morning and a sharp drop afterwards. Activity decreases earlier in the weekdays.
 
