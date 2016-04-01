@@ -130,8 +130,8 @@ Histogram of the total number of steps taken each day after missing values are i
 imputeTotalStepsPerDay <- aggregate(steps ~ date, imputeActivity, sum)
 
 par(mfrow=c(1,2))
-hist(totalStepsPerDay$steps, ylim = c(0,35), main = "Total steps/day before impute")
-hist(imputeTotalStepsPerDay$steps, main = "Total steps/day after impute")
+hist(totalStepsPerDay$steps, ylim = c(0,40), main = "Total steps/day before impute")
+hist(imputeTotalStepsPerDay$steps, ylim = c(0,40), main = "Total steps/day after impute")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)
