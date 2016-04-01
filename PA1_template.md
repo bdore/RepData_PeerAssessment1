@@ -66,7 +66,7 @@ Time series plot of the average number of steps taken
 
 ```r
 avgActivity <- aggregate(steps ~ interval, activity, mean)
-plot(avgActivity$interval, avgActivity$steps, col = "red", type= "l", main = "", xlab = "5-minute interval", ylab = "Average number of steps")
+plot(avgActivity$interval, avgActivity$steps, col = "red", type= "l", xlab = "5-minute interval", ylab = "Average number of steps", main = "Average number of steps during a day")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-7-1.png)
@@ -188,8 +188,8 @@ weekdayActivity <- imputeActivity[imputeActivity$day.of.the.week == "weekday",]
 weekdayAvgActivity <- aggregate(steps ~ interval, weekdayActivity, mean)
 
 par(mfrow=c(1,2))
-plot(weekdayAvgActivity$interval, weekdayAvgActivity$steps, type = "l", main = "Weekday Activity")
-plot(weekendAvgActivity$interval, weekendAvgActivity$steps, type = "l", main = "Weekend Activity", ylim = c(0, 200))
+plot(weekdayAvgActivity$interval, weekdayAvgActivity$steps, type = "l", main = "Weekday Activity", ylim = c(0, 250))
+plot(weekendAvgActivity$interval, weekendAvgActivity$steps, type = "l", main = "Weekend Activity", ylim = c(0, 250))
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)
