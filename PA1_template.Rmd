@@ -47,6 +47,8 @@ plot(avgActivity$interval, avgActivity$steps, col = "red", type= "l", xlab = "5-
 The 5-minute interval that, on average, contains the maximum number of steps
 ```{r}
 maxStepsInterval <- arrange(avgActivity, desc(avgActivity$steps))
+maxStepsInterval[1,1]
+maxStepsInterval[1,2]
 ```
 The 5-minute interval with max number of steps on average is interval **`r maxStepsInterval[1,1]`** with **`r maxStepsInterval[1,2]`** steps.
 
@@ -55,6 +57,7 @@ The 5-minute interval with max number of steps on average is interval **`r maxSt
 First identify which variables contain missing values:
 ```{r}
 summary(activity)
+sum(is.na(activity))
 ```
 All NA's are in the **steps** variable. There are **`r sum(is.na(activity))`** missing values.
 

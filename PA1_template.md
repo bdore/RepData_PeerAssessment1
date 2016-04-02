@@ -60,6 +60,19 @@ The 5-minute interval that, on average, contains the maximum number of steps
 
 ```r
 maxStepsInterval <- arrange(avgActivity, desc(avgActivity$steps))
+maxStepsInterval[1,1]
+```
+
+```
+## [1] 835
+```
+
+```r
+maxStepsInterval[1,2]
+```
+
+```
+## [1] 206.1698
 ```
 The 5-minute interval with max number of steps on average is interval **835** with **206.1698113** steps.
 
@@ -80,6 +93,14 @@ summary(activity)
 ##  3rd Qu.: 12.00   2012-10-05:  288   3rd Qu.:1766.2  
 ##  Max.   :806.00   2012-10-06:  288   Max.   :2355.0  
 ##  NA's   :2304     (Other)   :15840
+```
+
+```r
+sum(is.na(activity))
+```
+
+```
+## [1] 2304
 ```
 All NA's are in the **steps** variable. There are **2304** missing values.
 
